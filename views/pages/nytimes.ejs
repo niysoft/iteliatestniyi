@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%
+    include ../partials/header.ejs
+    %>
+
+</head>
+<body>
+<div class="container">
+    <hr>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div>
+                <ul>
+                    <%
+                    //const NytimesAPI = require('./controllers/NytimesAPI')
+                    for(var i = 0; i < newsItems.length; i++) {
+                        let newsItem = newsItems[i]
+                        //let newsItemObject = new Ny
+                        let image =  newsItem.media[0]["media-metadata"][1].url
+                        let title = newsItem.title.substring(0, 50);
+                        let abstract = newsItem.abstract.substring(0, 120);
+                        let byline  = newsItem.byline.substring(0, 20)+"...";
+
+                    %>
+                    <li class="list-holder">
+                        <a href="<%= newsItem.url %>" target="_blank">
+                            <div class="inner-cont">
+                                <img src="/images/chevron.png" class="forward-arrow">
+                                <!-- <img src="<%=    %>" class="news-images">-->
+                                <img src="<%= image %>" class="news-images">
+                                <h3 class="first-title"><%= title %></h3>
+                                <p class="abstract"><%= abstract %><!--How it works ersatile list style that you can use on any number of projects. Let’s see how it works.--></p>
+                                <p><%= byline %> <span class="right"><%= newsItem.published_date %></span></p>
+
+                            </div>
+                           <!-- <div class="arrow-cont"><img src="/images/chevron.png" class="forward-arrow"></div>-->
+                        </a>
+
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+</body>
+</html>
